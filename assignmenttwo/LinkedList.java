@@ -95,12 +95,7 @@ public class LinkedList
 		
 	}
 	
-	//blah
-	
-	
-	
-	
-	
+
 	
 	public void addFront(int payload)
 	{
@@ -137,4 +132,89 @@ public class LinkedList
 		}
 		this.count++;
 	}
+	
+	
+	
+	
+	
+	
+	public int removeAtIndex(int index) throws Exception
+	{
+		Node currNode = head;
+		if(head == null)
+		{
+			throw new Exception("Can Not Remove at Index: Empty List");
+		}
+		else if(this.count == 1)
+		{
+			return this.removeFront();
+		}
+		else if(index == 0)
+		{
+			return this.removeFront();
+		}
+		else
+		{
+			for(int i = 1; i < index && currNode.getNextNode() != null; i++)
+			{
+				currNode = currNode.getNextNode();
+			}
+			currNode.setNextNode(currNode.getNextNode().getNextNode());
+			//set the next node to whatever is next to it
+			count--;
+		}
+		currNode = currNode.getNextNode();
+		return currNode.getPayload();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public int removeEnd() throws Exception
+	{
+		if(head == null)
+		{
+			throw new Exception("Can Not Remove End: Empty List");
+		}
+		else if(this.count == 1)
+		{
+			return this.removeFront();
+		}
+		else
+		{
+			//finish this
+			Node currNode = head;
+			while(currNode.getNextNode() != null);
+			{
+				currNode = currNode.getNextNode(); //moving along in the list
+			}
+		
+			currNode = head;//why doesn't this work?
+			this.count--;
+			return currNode.getPayload();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	public int removeFront() throws Exception
+	{
+		if(head == null)
+		{
+			throw new Exception("Can Not Remove Front: Empty List");
+		}
+		Node currNode = head; //save currNode as head
+		head = head.getNextNode(); //head is now the next node over
+		currNode.setNextNode(null);//detaches it from the list
+		this.count--;
+		return currNode.getPayload();
+	}
+
 }
