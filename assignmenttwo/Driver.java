@@ -33,7 +33,6 @@ public class Driver
 		{
 			System.out.println("Failed to remove");
 		}
-		ll.addFront(3);
 		ll.display();
 		
 	

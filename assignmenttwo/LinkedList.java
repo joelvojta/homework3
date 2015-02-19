@@ -193,7 +193,7 @@ public class LinkedList
 				currNode = currNode.getNextNode(); //moving along in the list
 			}
 		
-			currNode = head;//why doesn't this work?
+			currNode = null;//why doesn't this work?
 			this.count--;
 			return currNode.getPayload();
 		}
