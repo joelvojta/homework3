@@ -186,15 +186,22 @@ public class LinkedList
 		}
 		else
 		{
+			
 			//finish this
 			Node currNode = head;
-			while(currNode.getNextNode() != null);
+			Node currNode2 = head;
+			while(currNode.getNextNode() != null)
 			{
-				currNode = currNode.getNextNode(); //moving along in the list
+				currNode = currNode.getNextNode();//moving along in the list
 			}
-		
-			currNode = null;//why doesn't this work?
+			
+			while(currNode2.getNextNode() != currNode)
+			{
+				currNode2 = currNode2.getNextNode();
+			}
+			currNode2.setNextNode(null);
 			this.count--;
+			
 			return currNode.getPayload();
 		}
 	}
