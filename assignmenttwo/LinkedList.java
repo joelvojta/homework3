@@ -3,6 +3,7 @@ package assignmenttwo;
 public class LinkedList 
 {
 	private Node head;
+	private Node tail;
 	private int count;
 	
 	
@@ -10,7 +11,7 @@ public class LinkedList
 	{
 		this.head = null;
 		this.count = 0;
-		
+		this.tail = null;
 	}
 	
 	public int get(int index)
@@ -55,20 +56,22 @@ public class LinkedList
 		}
 	}
 	
+	public void displayInReverse()
+	{
+		Node n = this.tail;
+		for(int i = 0; i < count; i++)
+		{
+			System.out.print(n.getPayload()); // find the end
+			System.out.print("->");   // add an arrow
+			n = n.getPrevNode();  // n is now the previous node
+		}
+		System.out.print(" null");
+	}
+	
 	public void addAtIndex(int payload, int index)
 	{
-		//hw goes here
-		//add a Node containing the payload such that this node will 
-		//be added to the list and live at position index.
-		//For now: any index less than zero should add at the front of
-		//the list, and any index greater than or equal to count should
-		//add at the end of the list
-	
 		
-		Node n = new Node(payload); //create node for payload
-		Node currNode = this.head;  //get a node made for traveling the list
-		
-		if(index < 0)
+		if(index <= 0)
 		{
 			this.addFront(payload);
 		}
@@ -79,18 +82,25 @@ public class LinkedList
 		}
 		else
 		{
-		for(int i = 1; i < index && currNode.getNextNode() != null; i++)
+
+			Node n = new Node(payload); //create node for payload
+			Node prevNode = null;  //create node for previous node
+			Node currNode = this.head;  //get a node made for traveling the list
+			for(int i = 0; i < index; i++)
 			//i=1, i less than total number of positions and the next node is 
 			//occupied, add to i
-		{
-			currNode = currNode.getNextNode();
+			{
+				prevNode = currNode; // set prevNode to current Node so it retains the value
+				currNode = currNode.getNextNode();
 			//current spot -> to next spot,  we traverse the linkedlist until 
 			//we get to specified spot
-		}
-		n.setNextNode(currNode.getNextNode());  
-		//the node containing the new value moves the current node aside
-		currNode.setNextNode(n); //we set the current node as n
-		this.count++;  //add to count
+			}
+			n.setNextNode(currNode);  
+			//the node containing the new value moves the current node aside
+			n.setPrevNode(prevNode);  // prevNode remembers the old currNode
+			currNode.setPrevNode(n); //we set the current node as n
+			prevNode.setNextNode(n); // setting final prevNode
+			this.count++;  //add to count
 		}
 		
 	}
@@ -102,12 +112,14 @@ public class LinkedList
 		Node n = new Node(payload);
 		if(head == null)
 		{
-			head = n;
+			this.head = n;
+			this.tail = n;
 		}
 		else
 		{
 			n.setNextNode(head);
-			head = n;
+			head.setPrevNode(n);
+			this.head = n;
 		}
 		this.count++;
 	}
@@ -121,58 +133,58 @@ public class LinkedList
 		}
 		else
 		{
-			//find the last node in the list
-			Node currNode = this.head;
-			while(currNode.getNextNode() != null)
-			{
-				currNode = currNode.getNextNode();
-			}
-			//currNode will point to the very last Node in the list
-			currNode.setNextNode(n);
+			this.tail.setNextNode(n);
+			n.setPrevNode(tail);
 		}
+		this.tail = n;
 		this.count++;
 	}
 	
-	
-	
-	
-	
+
 	
 	public int removeAtIndex(int index) throws Exception
 	{
-		Node currNode = head;
-		if(head == null)
+		//add different catches for user errors
+		if(head==null)
 		{
-			throw new Exception("Can Not Remove at Index: Empty List");
-		}
-		else if(this.count == 1)
-		{
-			return this.removeFront();
-		}
-		else if(index == 0)
+			throw new Exception("Cannot Remove from Index: Empty List");
+		}	
+		else if(this.count==1)
 		{
 			return this.removeFront();
+		}
+		else if(index >= count)
+		{
+			throw new Exception("Cannot Remove from Index: Index too Large");
+		}
+		else if(index < 0)
+		{
+			throw new Exception("Cannot Remove from Index: Index Must be Greater than Zero");
+		}
+		else if(index == count -1)
+		{
+			return this.removeEnd();
 		}
 		else
 		{
-			for(int i = 1; i < index && currNode.getNextNode() != null; i++)
+			Node currLead = null;  //leader is null
+			Node target = this.head; //target is first on the list
+			for(int i = 0; i < index; i++)  //traverse the list
 			{
-				currNode = currNode.getNextNode();
+				currLead = target; // looks like "currLead -> target" as they move from left to right
+				target = target.getNextNode();
 			}
-			currNode.setNextNode(currNode.getNextNode().getNextNode());
-			//set the next node to whatever is next to it
-			count--;
+			int payload = target.getPayload();   //finds int at target, saves it at payload
+			currLead.setNextNode(target.getNextNode()); //currLead sets itself as the node to the right of target
+			target.setPrevNode(null);  //the node to the left of target is now null
+			(target.getNextNode()).setPrevNode(currLead); // target is now currLead
+			target.setNextNode(null); //Node next to target is null
+			this.count--;
+			return payload;
 		}
-		currNode = currNode.getNextNode();
-		return currNode.getPayload();
-	}
+}
 	
-	
-	
-	
-	
-	
-	
+
 	
 	public int removeEnd() throws Exception
 	{
@@ -184,32 +196,15 @@ public class LinkedList
 		{
 			return this.removeFront();
 		}
-		else
-		{
-			
-			//finish this
-			Node currNode = head;
-			Node currNode2 = head;
-			while(currNode.getNextNode() != null)
-			{
-				currNode = currNode.getNextNode();//moving along in the list
-			}
-			
-			while(currNode2.getNextNode() != currNode)
-			{
-				currNode2 = currNode2.getNextNode();
-			}
-			currNode2.setNextNode(null);
-			this.count--;
-			
-			return currNode.getPayload();
-		}
+		Node curr = this.tail;
+		this.tail = this.tail.getPrevNode();
+		tail.setNextNode(null);
+		curr.setPrevNode(null);
+		count--;
+		return curr.getPayload();
 	}
 	
-	
-	
-	
-	
+
 	
 	public int removeFront() throws Exception
 	{
@@ -219,9 +214,11 @@ public class LinkedList
 		}
 		Node currNode = head; //save currNode as head
 		head = head.getNextNode(); //head is now the next node over
+		head.setPrevNode(null);
 		currNode.setNextNode(null);//detaches it from the list
 		this.count--;
 		return currNode.getPayload();
 	}
-
+	
+	
 }

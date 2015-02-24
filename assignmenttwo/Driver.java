@@ -7,14 +7,6 @@ public class Driver
 	public static void main(String[] args)
 	{
 		LinkedList ll = new LinkedList();
-		try 
-		{
-			System.out.println(ll.removeFront());
-		}
-		catch(Exception e)
-		{
-			System.out.println("Failed to remove");
-		}
 		ll.display();
 		ll.addEnd(3);
 		ll.addFront(6);
@@ -34,6 +26,7 @@ public class Driver
 			System.out.println("Failed to remove");
 		}
 		ll.display();
+		ll.displayInReverse();
 		
 	
 	}

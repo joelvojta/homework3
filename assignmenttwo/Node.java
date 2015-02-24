@@ -5,6 +5,7 @@ package assignmenttwo;
 public class Node 
 {
 	private Node nextNode;
+	private Node prevNode;
 	private int payload;
 
 	
@@ -12,12 +13,24 @@ public class Node
 	{
 		this.payload = payload;
 		this.nextNode = null;
+		this.prevNode = null;
 	}
- 
+	
+	public Node getPrevNode()
+	{
+		return this.prevNode;		
+	}
+	
 	public Node getNextNode() 
 	{
 		return this.nextNode;
 	}
+	
+	public void setPrevNode(Node input)
+	{
+		this.prevNode = input;
+	}
+	
  
 	public void setNextNode(Node nextNode) 
 	{
