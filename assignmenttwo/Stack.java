@@ -3,7 +3,6 @@ package assignmenttwo;
 public class Stack 
 {
 	private Node head;
-	private Node tail;
 	private int count;
 	
 	public Stack()
@@ -18,7 +17,7 @@ public class Stack
 		if(head == null)
 		{
 			this.head = n;
-			this.tail = n;
+			
 		}
 		else
 		{
@@ -39,7 +38,6 @@ public class Stack
 		{
 			int payloadToReturn = this.head.getPayload();
 			this.head = null;
-			this.tail = null;
 			this.count = 0;
 			return payloadToReturn;
 		}
