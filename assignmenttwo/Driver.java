@@ -4,8 +4,19 @@ package assignmenttwo;
 
 public class Driver 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
+		Stack mm = new Stack();
+		mm.push(5);
+		mm.push(4);
+		mm.push(3);
+		mm.push(2);
+		mm.push(1);
+		mm.push(0);
+		mm.push(7);
+		mm.peek();
+		mm.pop();
+		
 		LinkedList ll = new LinkedList();
 		ll.display();
 		ll.addEnd(3);
@@ -17,17 +28,7 @@ public class Driver
 		ll.addAtIndex(8, 4);
 		ll.display();
 		System.out.println(ll.get(1));
-		try 
-		{
-			System.out.println(ll.removeEnd());
-		}
-		catch(Exception e)
-		{
-			System.out.println("Failed to remove");
-		}
 		ll.display();
 		ll.displayInReverse();
-		
-	
 	}
 }
