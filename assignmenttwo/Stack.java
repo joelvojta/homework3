@@ -11,18 +11,22 @@ public class Stack
 		this.count = 0;
 	}
 	
+	public boolean isEmpty()
+	{
+		return this.head == null;
+	}
+	
 	public void push(int payload)
 	{
 		Node n = new Node(payload);
-		if(head == null)
+		if(this.head == null)
 		{
 			this.head = n;
 			
 		}
 		else
 		{
-			n.setNextNode(head);
-			head.setPrevNode(n);
+			n.setNextNode(this.head);
 			this.head = n;
 		}
 		this.count++;
@@ -30,37 +34,27 @@ public class Stack
 	
 	public int pop() throws Exception
 	{
-		if(head == null)
+		if(this.head == null)
 		{
-			throw new Exception("Can Not Remove Front: Empty List");
-		}
-		else if(this.count == 1)
-		{
-			int payloadToReturn = this.head.getPayload();
-			this.head = null;
-			this.count = 0;
-			return payloadToReturn;
-		}
-		Node currNode = head; 
-		head = head.getNextNode(); 
-		head.setPrevNode(null);
-		currNode.setNextNode(null);
-		this.count--;
-		return currNode.getPayload();
-	}
-	
-	public int peek()
-	{
-		Node curr = head;
-		if (head == null)
-		{
-			System.out.println("Empty Stack");
-			return -1;
+			throw new Exception("Emtpy Stack!!!  Cry More");
 		}
 		else
 		{
-			System.out.println(curr.getPayload());
-			return curr.getPayload();
+			int valToReturn = this.head.getPayload();
+			this.head = this.head.getNextNode();
+			return valToReturn;
+		}
+	}
+	
+	public int peek() throws Exception
+	{
+		if (this.head == null)
+		{
+			throw new Exception("Empty Stack!");
+		}
+		else
+		{
+			return this.head.getPayload();
 		}
 	}
 	

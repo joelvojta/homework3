@@ -6,7 +6,11 @@ public class Driver
 {
 	public static void main(String[] args) throws Exception
 	{
-		Stack mm = new Stack();
+		RPCalc theCalc = new RPCalc();
+		theCalc.on();
+		
+	
+		/**Stack mm = new Stack();
 		mm.push(5);
 		mm.push(4);
 		mm.push(3);
@@ -30,5 +34,6 @@ public class Driver
 		System.out.println(ll.get(1));
 		ll.display();
 		ll.displayInReverse();
+		*/
 	}
 }
