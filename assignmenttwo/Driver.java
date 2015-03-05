@@ -1,29 +1,14 @@
 package assignmenttwo;
 
+import java.util.Scanner;
 public class Driver 
 {
 	public static void main(String[] args) throws Exception
 	{
+		Game toh = new Game();
+		toh.play();
+	
 		
-		Tower[] game;
-		game = new Tower[3];
-		Tower t = new Tower();
-		Tower t2 = new Tower();
-		Tower t3 = new Tower();
-		t.on();
-		game[0] = t;
-		game[1] = t2;
-		game[2] = t3;
-		
-		
-		
-		System.out.println(t.addDisc(new Disc(3)));
-		System.out.println(t.addDisc(new Disc(2)));
-		System.out.println(t.addDisc(new Disc(1)));
-		t.display();
-		System.out.println(t.removeDisc());
-		System.out.println(t.removeDisc());
-		System.out.println(t.removeDisc());
 		
 		/**RPCalc theCalc = new RPCalc();
 		theCalc.on();

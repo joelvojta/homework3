@@ -15,7 +15,7 @@ public class Disc extends Object
 
 	public String toString()
 	{
-		return "" + this.size + "(" + super.toString() + ")";
+		return "" + this.size;
 	}
 	
 	public Disc getNextDisc() {
