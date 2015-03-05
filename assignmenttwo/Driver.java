@@ -10,16 +10,16 @@ public class Driver
 		Tower t = new Tower();
 		Tower t2 = new Tower();
 		Tower t3 = new Tower();
-		
+		t.on();
 		game[0] = t;
 		game[1] = t2;
-		game[0] = t3;
+		game[2] = t3;
 		
 		
 		
+		System.out.println(t.addDisc(new Disc(3)));
+		System.out.println(t.addDisc(new Disc(2)));
 		System.out.println(t.addDisc(new Disc(1)));
-		System.out.println(t.addDisc(new Disc(0)));
-		System.out.println(t.addDisc(new Disc(5)));
 		t.display();
 		System.out.println(t.removeDisc());
 		System.out.println(t.removeDisc());

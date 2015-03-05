@@ -7,12 +7,17 @@ import java.util.Scanner;
 public class Tower 
 
 {
-	
+	private Tower t;
+	private Tower t2;
+	private Tower t3;
 	private Disc top;
 	
 	public Tower()
 	{
 		top = null;
+		this.t = new Tower();
+		this.t2 = new Tower();
+		this.t3 = new Tower();
 	}
 	
 	public Disc peek()
@@ -21,11 +26,13 @@ public class Tower
 	}
 	
 	//homework start
-	
+/**	
 	public void on() throws Exception
 	{
 		Scanner input = new Scanner(System.in);
-		
+		t.addDisc(new Disc(3));
+		t.addDisc(new Disc(2));
+		t.addDisc(new Disc(1));
 		while(true)
 		{
 			System.out.print("=> ");
@@ -36,6 +43,7 @@ public class Tower
 			}
 			else if(val.equalsIgnoreCase("show"))
 			{
+				/**
 			    System.out.println(game);
 				Tower temp = new Tower();
 				while(!this.theStack.isEmpty())
@@ -48,16 +56,25 @@ public class Tower
 					System.out.println(num);
 					this.theStack.push(num);
 				}
+				
+				Disc curr = this.top;
+				do
+				{
+					//System.out.println(curr.getSize());
+					curr = curr.getNextDisc();
+				}
+				while(curr != null);
+				
 			}
 		}
-		else
+		//else
 		{
 			System.out.println("Illegal Input");
 		}
 	}
 
 	
-	public Disc move
+	//public Disc move
 	
 	
 	
@@ -66,7 +83,7 @@ public class Tower
 	
 
 	
-	
+	*/
 	//homework end
 	
 	public Disc removeDisc()
